@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Példa oldal</title>
+		<style>
+			body, input, textarea {
+				font-size: 24px;
+			}
+
+			.row label {
+				display: grid;
+				grid-template-columns: 200px 1fr;
+				margin: 10px;
+			}
+
+			textarea {
+				height: 10em;
+			}
+
+			input, textarea {
+				border: 1px solid #888;
+				border-radius: 4px;
+				box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
+				padding: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<form>
+			<div class="row">
+				<label>
+					Egy soros beviteli mező:
+					<input type="text">
+				</label>
+			</div>
+			<div class="row">
+				<label>
+					Több soros beviteli mező:
+					<textarea></textarea>
+				</label>
+			</div>
+		</form>
+	</body>
+</html>

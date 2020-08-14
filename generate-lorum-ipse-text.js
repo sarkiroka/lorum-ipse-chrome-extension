@@ -1,5 +1,5 @@
 /**
- *
+ * bővítmény inicializálása
  * @author sarkiroka on 2020.08.14.
  */
 const DEBUG = false;
