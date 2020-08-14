@@ -1,0 +1,35 @@
+{
+	"name": "Lórum Ipse",
+	"description": "Feltölti a beviteli mezőt Lórum ipse tartalommal. A Lórum ipse egy olyan szöveggenerátor, amely magyarosan hangzó, ám halandzsa szöveget gyárt, nyelvtanában a magyar nyelv szabályait követi. Az ilyen szövegek alkalmasak tipográfiai mintaszövegnek, úgynevezett vakszövegnek. A vakszövegek egyik népszerű formája a lorem ipsum, amelynek számos változatát is elkészítették.",
+	"version": "1.0",
+	"background": {
+		"scripts": [
+			"generate-lorum-ipse-text.js"
+		]
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"http://*/*",
+				"https://*/*"
+			],
+			"js": [
+				"lorum-ipse-content-script.js"
+			]
+		}
+	],
+	"browser_action": {
+		"default_icon": "lorum-ipse.png",
+		"name": "Call Lórum Ipse"
+	},
+	"icons": {
+		"16": "lorum-ipse-16.png",
+		"48": "lorum-ipse-48.png",
+		"128": "lorum-ipse-128.png"
+	},
+	"permissions": [
+		"activeTab",
+		"contextMenus"
+	],
+	"manifest_version": 2
+}
