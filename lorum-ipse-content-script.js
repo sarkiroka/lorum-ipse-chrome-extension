@@ -42,7 +42,6 @@ function getActiveElement(document, iterationCount = 0) {
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 	if (message.action == 'fill-with-lorum-ipse') {
-		debug('lorum ipse íróját megszólították', {message, element});
 		let element = null;
 		try {
 			element = getActiveElement(document);
@@ -50,6 +49,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 			console.warn('nem lehet elérni az aktív elemet', e);
 			sendResponse(false);
 		}
+		debug('lorum ipse íróját megszólították', {message, element});
 		if (element) {
 			const VALID_TYPES = ['TEXT', 'SEARCH'];
 			const isTextInputField = element.tagName.toUpperCase() == 'INPUT' && (element.getAttribute('type') == null || VALID_TYPES.includes(element.getAttribute('type').toUpperCase()));
