@@ -71,13 +71,18 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 				const end = Math.max(selection.anchorOffset, selection.focusOffset);
 
 				newValue = oldValue.substr(0, start) + message.text + oldValue.substr(end);
+				element.value = newValue;
 				position = start + message.text.length;
-				const range = document.createRange();
-				range.setStart(element, position);
-				range.setEnd(element, position);
-				range.collapse(true);
-				selection.removeAllRanges();
-				selection.addRange(range);
+				try {
+					const range = document.createRange();
+					range.setStart(element, position);
+					range.setEnd(element, position);
+					range.collapse(true);
+					selection.removeAllRanges();
+					selection.addRange(range);
+				} catch (e) {
+					element.setSelectionRange(position, position);
+				}
 			} else {
 				console.warn('there is no active input element', element);
 			}
