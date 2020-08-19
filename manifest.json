@@ -11,7 +11,8 @@
 		{
 			"matches": [
 				"http://*/*",
-				"https://*/*"
+				"https://*/*",
+				"file://*/*"
 			],
 			"js": [
 				"lorum-ipse-content-script.js"
@@ -28,7 +29,6 @@
 		"128": "lorum-ipse-128.png"
 	},
 	"permissions": [
-		"activeTab",
 		"contextMenus"
 	],
 	"manifest_version": 2

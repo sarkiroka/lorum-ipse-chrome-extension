@@ -54,7 +54,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 			const VALID_TYPES = ['TEXT', 'SEARCH'];
 			const isTextInputField = element.tagName.toUpperCase() == 'INPUT' && (element.getAttribute('type') == null || VALID_TYPES.includes(element.getAttribute('type').toUpperCase()));
 			const isTextarea = element.tagName == 'TEXTAREA';
-			const oldValue = element.value;
+			const isContentEditable = element.getAttribute('contenteditable') == 'true';
+			let oldValue = element.value;
 			let newValue = '';
 			let position = 0;
 			element.focus();
@@ -82,6 +83,20 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 					selection.addRange(range);
 				} catch (e) {
 					element.setSelectionRange(position, position);
+				}
+			} else if (isContentEditable) {
+				const selection = document.getSelection();
+				const start = Math.min(selection.anchorOffset, selection.focusOffset);
+				const end = Math.max(selection.anchorOffset, selection.focusOffset);
+				let node = selection.focusNode;
+				let lorumIpseTextNode = document.createTextNode(message.text);
+				if (node.nodeType == Node.TEXT_NODE) {
+					let afterText = node.splitText(selection.focusOffset);
+					afterText.parentNode.insertBefore(lorumIpseTextNode, afterText);
+				} else if (node.nodeType == Node.ELEMENT_NODE) {
+					node.appendChild(lorumIpseTextNode);
+				} else {
+					console.warn('unhandled nodetype for insert lórum ipse');
 				}
 			} else {
 				console.warn('there is no active input element', element);
