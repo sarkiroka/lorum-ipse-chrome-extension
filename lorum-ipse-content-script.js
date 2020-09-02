@@ -85,7 +85,12 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 					element.setSelectionRange(position, position);
 				}
 			} else if (isContentEditable) {
-				const selection = document.getSelection();
+				let selection;
+				if (document.activeElement.tagName == 'IFRAME') {
+					selection = document.activeElement.contentDocument.getSelection();
+				} else {
+					selection = document.getSelection();
+				}
 				const start = Math.min(selection.anchorOffset, selection.focusOffset);
 				const end = Math.max(selection.anchorOffset, selection.focusOffset);
 				let node = selection.focusNode;
@@ -101,6 +106,11 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 			} else {
 				console.warn('there is no active input element', element);
 			}
+			var event = new Event('input', {
+				bubbles: true,
+				cancelable: true,
+			});
+			element.dispatchEvent(event);
 			sendResponse(true);
 		}
 	} else {
