@@ -1,6 +1,6 @@
 {
 	"name": "Lórum Ipse",
-	"description": "Feltölti a beviteli mezőt Lórum ipse tartalommal ami a vakszövegnek (például \"Lorum ipsum\") egy magyaros változata.",
+	"description": "Feltölti a beviteli mezőt Lórum ipse tartalommal ami a vakszövegnek (például \"Lorem ipsum\") egy magyaros változata.",
 	"version": "1.1",
 	"background": {
 		"scripts": [
